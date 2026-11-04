@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1744" height="1040" viewBox="0 0 872 520" fill="none">
+  <title>Silver lung cancer awareness ribbon</title>
+  <desc>A silver satin awareness ribbon with a softly folded loop and a flowing tail. Scalable vector artwork on a transparent background.</desc>
+  <defs>
+    <linearGradient id="loop" x1="649" y1="90" x2="770" y2="183" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fcfcfc"/><stop offset=".3" stop-color="#e3e4e6"/>
+      <stop offset=".65" stop-color="#b5b8bf"/><stop offset="1" stop-color="#e6e7eb"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="686" y1="60" x2="714" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8e9ec"/><stop offset=".5" stop-color="#c4c7ce"/>
+      <stop offset="1" stop-color="#9299a5"/>
+    </linearGradient>
+    <linearGradient id="tail" x1="303" y1="356" x2="286" y2="454" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/><stop offset=".35" stop-color="#f5f6f8"/>
+      <stop offset=".7" stop-color="#e7e9ee"/><stop offset="1" stop-color="#cdd1da"/>
+    </linearGradient>
+    <linearGradient id="tailFold" x1="222" y1="408" x2="311" y2="389" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b5bbc7"/><stop offset=".5" stop-color="#d3d7df"/>
+      <stop offset="1" stop-color="#f2f3f6"/>
+    </linearGradient>
+    <linearGradient id="sweep" x1="607" y1="254" x2="683" y2="322" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fefefe"/><stop offset=".45" stop-color="#f2f3f6"/>
+      <stop offset="1" stop-color="#d6dae2"/>
+    </linearGradient>
+    <linearGradient id="front" x1="667" y1="250" x2="735" y2="215" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d9dde4"/><stop offset=".28" stop-color="#f3f4f7"/>
+      <stop offset=".6" stop-color="#ffffff"/><stop offset="1" stop-color="#e6e8ee"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="652" y1="143" x2="804" y2="454" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".65"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-12%" width="125%" height="135%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#4a6b94" flood-opacity=".12"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <!-- Curved inner face of the loop; the opening remains transparent. -->
+    <path d="M653 144C650 105 661 64 690 51C713 40 738 46 750 69C761 91 765 120 758 145L739 167C740 132 727 108 705 102C683 96 665 112 653 144Z" fill="url(#inner)"/>
+    <path d="M653 144C652 107 665 70 692 57C713 48 734 54 746 74C754 89 759 110 758 129C741 110 726 101 708 99C684 96 667 114 653 144Z" fill="url(#loop)"/>
+    <!-- Long satin tail, turning gently at the left-hand fold. -->
+    <path d="M73 365L103 382L115 367C145 401 171 420 204 418C231 417 244 377 279 369C321 359 350 392 385 411C425 433 468 438 511 419L537 450C489 473 433 471 386 448C352 432 329 409 302 411C271 414 261 449 222 451C171 455 126 429 96 398Z" fill="url(#tail)"/>
+    <path d="M204 418C231 417 244 377 279 369C291 366 302 367 312 371C281 370 274 416 247 438C239 445 231 449 222 451C194 453 174 447 155 437C174 440 193 432 204 418Z" fill="url(#tailFold)"/>
+    <!-- The rear strip descends diagonally into the trailing fold. -->
+    <path d="M749 83C773 128 755 187 725 237C686 303 634 371 579 415C557 433 546 440 537 450C491 470 435 469 386 448C430 456 469 447 511 419C563 384 613 324 656 268C696 216 727 167 738 131C744 111 745 96 749 83Z" fill="url(#sweep)"/>
+    <path d="M749 84C768 127 750 185 719 237C679 302 629 365 574 409C551 427 532 440 511 449" stroke="#ffffff" stroke-opacity=".55" stroke-width="1.2"/>
+    <!-- Front strip crosses the rear strip and finishes with an angled end. -->
+    <path d="M692 52C672 69 664 94 668 120C671 151 690 185 714 222C749 277 791 337 831 401L809 421L805 465C750 397 709 338 675 281C644 230 631 191 635 154C639 108 659 63 692 52Z" fill="url(#front)"/>
+    <path d="M692 52C673 71 665 94 670 120C675 153 693 187 717 224C751 277 793 340 831 401" stroke="url(#edge)" stroke-width="1.5"/>
+    <path d="M637 154C635 190 648 229 677 279C712 338 754 399 805 465" stroke="#c6ccd6" stroke-opacity=".35" stroke-width="1"/>
+  </g>
+</svg>
