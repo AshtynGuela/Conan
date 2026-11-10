@@ -256,7 +256,7 @@ function renderSubnav(route) {
 <nav class="subnav" aria-label="Main sections">
   <div class="subnav-tabs">
     ${items.map(([href, label, active]) =>
-      `<a href="${href}" class="subnav-tab ${active ? 'active' : ''}">${label}</a>`
+      `<a href="${href}" class="subnav-tab ${active ? 'active' : ''}"${active ? ' aria-current="page"' : ''}>${label}</a>`
     ).join("")}
   </div>
 </nav>`;
@@ -1152,11 +1152,23 @@ document.addEventListener("drop", (e) => {
   }
 });
 
+function closeHeaderMenu({ restoreFocus = false } = {}) {
+  const menu = $("#header-menu");
+  if (!menu || menu.hidden) return;
+  menu.hidden = true;
+  const toggle = $("[data-act=menu]");
+  toggle?.setAttribute("aria-expanded", "false");
+  if (restoreFocus) toggle?.focus();
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeHeaderMenu({ restoreFocus: true });
+});
+
 /* Click delegation */
 document.addEventListener("click", (e) => {
   if (!e.target.closest("#header-menu, [data-act=menu]")) {
-    const m = $("#header-menu");
-    if (m) m.hidden = true;
+    closeHeaderMenu();
   }
 
   const b = e.target.closest("[data-act]");

@@ -122,6 +122,25 @@ body[data-page="login"] header, body[data-page="signup"] header { background: tr
 .assess-card-title { min-width: 0; flex: 1; font-size: clamp(24px,2.4vw,34px); line-height: 1.05; color: #149d88; }
 .assess-card-body { font-size: clamp(18px,1.85vw,26px); line-height: 1.2; color: #009e89; font-weight: 400; margin: 20px 0 28px; }
 .assess-card-start-btn { border-radius: 9px; padding: 18px 8px; font-size: clamp(19px,2vw,29px); background: #7ec6be; }
+
+@media (min-width: 1101px) {
+  body[data-page="home-landing"] .top-nav {
+    position: absolute;
+    right: 6.3%;
+    top: 80px;
+    width: min(36%, 460px);
+    border-top: 1px solid #3e819a;
+    border-right: 1px solid #3e819a;
+  }
+
+  body[data-page="home-landing"] .top-nav-box { width: 100%; justify-content: space-evenly; padding-block: 9px; }
+  body[data-page="home-landing"] .top-nav a { padding-inline: 8px; }
+  .hero-section { align-items: flex-start; padding-top: clamp(86px, 13svh, 108px); }
+  .hero-headline { line-height: 1.06; }
+  .assess-card-top { gap: 12px; margin-inline: -6px; }
+  .assess-card-title { font-size: clamp(25px, 2.3vw, 34px); letter-spacing: -.025em; text-align: center; }
+}
+
 .wiz-page { padding: 34px 18px 50px; }
 .wiz-card { min-height: max(440px,calc(100svh - 272px)); padding: 20px 24px 24px; border: 0; border-radius: 0; box-shadow: none; background: linear-gradient(100deg,#8fc6bd,#73a1d0); backdrop-filter: none; display: flex; flex-direction: column; }
 .wiz-section-label { font-size: clamp(20px,2.1vw,29px); line-height: 1.2; letter-spacing: -.015em; margin: 0 0 18px; text-shadow: 0 2px 5px #30546280; }
