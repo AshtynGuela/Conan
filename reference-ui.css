@@ -313,6 +313,45 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
   body[data-page="login"] .top-nav,
   body[data-page="signup"] .top-nav { margin: 0 0 0 58px; }
 }
+:is(.hero-cta-btn, .assess-card-start-btn, .btn-wiz-next, .auth-btn-pill):active:not(:disabled) {
+  filter: brightness(.92);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ribbon-col img {
+    transform-origin: 82% 32%;
+    animation: ribbon-settle 660ms cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .header-menu:not([hidden]) {
+    animation: panel-arrive 160ms ease-out;
+  }
+
+  .modal-box {
+    animation: panel-arrive 250ms cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .confidence-bar {
+    transform-origin: left center;
+    animation: result-fill 320ms cubic-bezier(.16, 1, .3, 1);
+  }
+
+  @keyframes ribbon-settle {
+    from { transform: translateY(12px) rotate(-2deg); opacity: .72; }
+    to { transform: none; opacity: 1; }
+  }
+
+  @keyframes panel-arrive {
+    from { transform: translateY(-5px); opacity: .84; }
+    to { transform: none; opacity: 1; }
+  }
+
+  @keyframes result-fill {
+    from { transform: scaleX(.45); }
+    to { transform: scaleX(1); }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
