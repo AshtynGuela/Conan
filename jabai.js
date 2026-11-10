@@ -211,6 +211,8 @@ function renderHeader(route) {
     ${hamburger}
   </nav>
   <div class="header-menu" id="header-menu" hidden>
+    <a class="mobile-nav-link" href="#/contact">Contact</a>
+    <a class="mobile-nav-link" href="#/faq">FAQ</a>
     ${menuItems}
   </div>
 </header>`;
@@ -559,7 +561,7 @@ function renderFactorBox(key) {
 /* X-Ray Radiograph Upload Step (Exact Images 21, 30) */
 function renderUploadStep(title, btnLabel) {
   return `
-<div class="wiz-card">
+<div class="wiz-card wiz-upload">
   <div class="wiz-section-label">${title}</div>
   <label class="xray-drop-container" id="xray-drop" for="xray-file">
     <input class="xray-file-input" type="file" id="xray-file" accept="image/png,image/jpeg">
@@ -765,6 +767,7 @@ function dashboard() {
 
   return `
 <div class="dashboard-page">
+  <div class="dashboard-surface">
   <div class="dashboard-stats-grid">
     <div class="dash-stat-card">
       <div class="dash-stat-label">TOTAL PATIENTS SCREENED</div>
@@ -813,6 +816,7 @@ function dashboard() {
          </table>`
     }
   </div>
+  </div>
 </div>`;
 }
 
@@ -830,11 +834,11 @@ function privacyConsentModal() {
         <path d="M10 9V7a2 2 0 1 1 4 0v2"/>
       </svg>
       <div class="modal-head-title">
-        <h2 id="privacy-modal-title">Privacy Policy &amp; Consent</h2>
+        <h2 id="privacy-modal-title" tabindex="-1">Privacy Policy &amp; Consent</h2>
         <p>Please review before using CONAN for patient assessment.</p>
       </div>
     </div>
-    <div class="modal-scroll-body">
+    <div class="modal-scroll-body" tabindex="0" role="region" aria-label="Privacy policy details">
       <h3>Authorized Professional Use</h3>
       <p>CONAN is intended exclusively for healthcare professionals. Authorized users are responsible for ensuring that patient information entered into the system is obtained and handled appropriately.</p>
       <h3>Purpose of Processing</h3>
@@ -989,6 +993,12 @@ function draw() {
     `<main id="main" tabindex="-1">${content}</main>` +
     `<footer>Developed by D.R. Alanib, S.F. Gojar, V.T. Gadil · <a href="#/privacy-policy">Privacy Notice</a></footer>` +
     privacyHtml;
+
+  if (S.showPrivacy) {
+    const modal = $("#privacy-modal");
+    for (const child of $("#app").children) child.inert = child !== modal;
+    $("#privacy-modal-title").focus({ preventScroll: true });
+  }
 }
 
 function route() {
