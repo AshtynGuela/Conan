@@ -270,12 +270,28 @@ function renderSubnav(route) {
 function homeLanding() {
   return `
 <div class="landing">
+  <!-- Landing headline and account actions -->
+  <div class="landing-right-panel">
+    <div>
+      <h1 class="landing-hero-head">Spot the risk.<br><em>Before it stops a life.</em></h1>
+      <p class="landing-hero-desc">A clinician-facing research demo for exploring a lung cancer screening workflow with sample data.</p>
+    </div>
+    <div>
+      <h2 class="landing-system-title">Lung Cancer Risk Screening System</h2>
+      <div class="landing-buttons-row">
+        <a href="#/login" class="btn-pill-white">Log In</a>
+        <a href="#/signup" class="btn-pill-mint">Create Account</a>
+      </div>
+      <p class="lab-demo-note">Research demo. Use sample patient data.</p>
+    </div>
+  </div>
+
   <!-- Feature 1: Healthcare Support -->
   <div class="landing-col">
     <div class="feature-card-content">
       <img src="images/canva/hearticon.svg" class="feature-icon-img" width="67" height="68" alt="" aria-hidden="true">
       <h2 class="feature-card-title">Healthcare Support</h2>
-      <p class="feature-card-desc">CONAN assists healthcare professionals by integrating clinical risk factors and chest X-ray analysis into a structured risk assessment, supporting informed screening and further evaluation of patients.</p>
+      <p class="feature-card-desc">Explore how a clinician could collect sample risk factors and review a structured screening result.</p>
     </div>
   </div>
 
@@ -284,22 +300,7 @@ function homeLanding() {
     <div class="feature-card-content">
       <img src="images/canva/ribicon.svg" class="feature-icon-img" width="68" height="68" alt="" aria-hidden="true">
       <h2 class="feature-card-title">Early Intervention</h2>
-      <p class="feature-card-desc">CONAN helps organize patient information and imaging results into clear risk classifications, supporting timely identification of patients who may require further evaluation.</p>
-    </div>
-  </div>
-
-  <!-- Right Panel: Headline & CTAs -->
-  <div class="landing-right-panel">
-    <div>
-      <h1 class="landing-hero-head">SPOT THE RISK<br>BEFORE IT<br>STOPS A LIFE</h1>
-      <p class="landing-hero-desc">CONAN brings lung cancer risk awareness closer to everyone, using clinical information and chest X-ray analysis to help identify potential risks earlier and encourage timely action.</p>
-    </div>
-    <div>
-      <h2 class="landing-system-title">Lung Cancer Risk<br>Screening System</h2>
-      <div class="landing-buttons-row">
-        <a href="#/login" class="btn-pill-white">Log In</a>
-        <a href="#/signup" class="btn-pill-mint">Create Account</a>
-      </div>
+      <p class="feature-card-desc">Walk through clinical, X-ray, and combined assessments using fictional patient details and sample images.</p>
     </div>
   </div>
 </div>`;
@@ -324,10 +325,6 @@ function login() {
         <p class="auth-feedback" id="pw-error" aria-live="polite"></p>
       </div>
       <button class="auth-btn-pill" type="submit">LOG IN</button>
-      <button type="button" class="auth-forgot" data-act="forgot">Forgot Password?</button>
-      <label class="auth-check">
-        <input type="checkbox" name="remember"> Remember Me
-      </label>
       <p class="auth-link">Don't have an account? <a href="#/signup">Sign Up</a></p>
     </form>
   </div>
@@ -357,9 +354,6 @@ function signup() {
         <p class="auth-feedback" id="reg-pw3-error" aria-live="polite"></p>
       </div>
       <button class="auth-btn-pill" type="submit">SIGN UP</button>
-      <label class="auth-check">
-        <input type="checkbox" name="remember"> Remember Me
-      </label>
       <p class="auth-link">Already have an account? <a href="#/login">Log In</a></p>
     </form>
   </div>
@@ -373,8 +367,8 @@ function home() {
   return `
 <div class="hero-section">
   <div class="hero-left-content">
-    <h1 class="hero-headline">SPOT THE RISK<br>BEFORE IT STOPS A LIFE</h1>
-    <p class="hero-desc">CONAN uses clinical information and chest X-ray imaging to provide an integrated view of lung cancer risk—helping bring early risk awareness closer to every community.</p>
+    <h1 class="hero-headline">Spot the risk.<br><em>Before it stops a life.</em></h1>
+    <p class="hero-desc">Explore a lung cancer screening workflow using sample clinical information and chest X-ray images. This research demo produces simulated results.</p>
     <a href="#/assess" class="hero-cta-btn">GET STARTED →</a>
   </div>
   <div class="hero-ribbon-col" aria-hidden="true">
@@ -389,7 +383,7 @@ function home() {
 function assess() {
   return `
 <div class="assess-page">
-  <div class="assess-page-title">CHOOSE ASSESSMENT PATH</div>
+  <h1 class="assess-page-title">Choose an assessment path</h1>
   <div class="assess-cards-grid">
     <!-- Card 1: Clinical Risk Assessment -->
     <div class="assess-option-card">
@@ -397,8 +391,8 @@ function assess() {
         <img class="assess-card-icon" src="images/canva/clinical.png" width="70" height="84" alt="" aria-hidden="true">
         <h2 class="assess-card-title">Clinical Risk<br>Assessment</h2>
       </div>
-      <p class="assess-card-body">Enter patient's personal information, symptoms, health history, and other relevant clinical information. CONAN analyzes 23 key risk factors to generate an estimated lung cancer risk level for professional review and clinical decision support.</p>
-      <a href="#/clinical" class="assess-card-start-btn">Start Assessment</a>
+      <p class="assess-card-body">Work through a questionnaire on symptoms, health history, and clinical risk factors.</p>
+      <a href="#/clinical" class="assess-card-start-btn">Start clinical assessment</a>
     </div>
 
     <!-- Card 2: Chest X-Ray Analysis -->
@@ -407,8 +401,8 @@ function assess() {
         <img class="assess-card-icon" src="images/canva/radiology.png" width="70" height="84" alt="" aria-hidden="true">
         <h2 class="assess-card-title">Chest X-Ray<br>Analysis</h2>
       </div>
-      <p class="assess-card-body">Upload the patient's chest x-ray for risk analysis. CONAN processes and evaluates the image for relevant radiographic patterns and generate an estimated lung cancer risk level for professional review and clinical decision support.</p>
-      <a href="#/imaging" class="assess-card-start-btn">Start Assessment</a>
+      <p class="assess-card-body">Upload a sample chest X-ray and see how an imaging result would be presented.</p>
+      <a href="#/imaging" class="assess-card-start-btn">Start X-ray assessment</a>
     </div>
 
     <!-- Card 3: Combined Risk Assessment -->
@@ -417,8 +411,8 @@ function assess() {
         <img class="assess-card-icon" src="images/canva/combined.png" width="70" height="84" alt="" aria-hidden="true">
         <h2 class="assess-card-title">Combined Risk<br>Assessment</h2>
       </div>
-      <p class="assess-card-body">Enter the patient's clinical data and upload their chest x-ray image to generate an integrated lung cancer risk level for professional review and clinical decision support.</p>
-      <a href="#/combined" class="assess-card-start-btn">Start Assessment</a>
+      <p class="assess-card-body">Complete the clinical questionnaire and upload a sample X-ray in one workflow.</p>
+      <a href="#/combined" class="assess-card-start-btn">Start combined assessment</a>
     </div>
   </div>
 </div>`;
@@ -449,6 +443,10 @@ function wiz() {
 
   return `
 <div class="wiz-page">
+  <div class="lab-progress">
+    <span>Step ${stepIdx + 1} of ${steps.length}</span>
+    <progress value="${stepIdx + 1}" max="${steps.length}" aria-label="Assessment progress"></progress>
+  </div>
   ${S.err ? `<div class="err-msg">${esc(S.err)}</div>` : ""}
   ${cardContent}
 </div>`;
@@ -661,100 +659,34 @@ function results() {
   }
 
   const cl = catClass(r.cat);
-  const confPercent = Math.min(100, Math.max(15, 100 - Math.abs(r.p - 50)));
-
-  const breakdownFactors = [
-    { icon: "👤", bg: "#d1fae5", name: "Age", sub: "Higher age increases risk", val: r.age ? `${r.age} years` : "62 years", cat: "Low" },
-    { icon: "🚬", bg: "#dbeafe", name: "Smoking History", sub: "Current or former smoker", val: S.vals.smk > 3 ? "Yes" : "No", cat: r.cat },
-    { icon: "🫁", bg: "#f3e8ff", name: "Coughing", sub: "Persistent cough", val: S.vals.dry > 2 || S.vals.blood > 1 ? "Yes" : "No", cat: r.cat },
-    { icon: "🫁", bg: "#e0f2fe", name: "Shortness of Breath", sub: "Difficulty breathing", val: S.vals.sob > 2 ? "Yes" : "No", cat: "Low" },
-    { icon: "⚡", bg: "#fae8ff", name: "Chest Pain", sub: "Pain in chest area", val: S.vals.pain > 2 ? "Yes" : "No", cat: "Low" },
-    { icon: "❤️", bg: "#dbeafe", name: "Chronic Disease", sub: "Existing chronic conditions", val: S.vals.chr > 2 ? "Yes" : "No", cat: "Low" },
-  ];
+  const score = Math.min(100, Math.max(0, Number(r.p) || 0));
+  const inputs = [["Clinical questionnaire", r.pc], ["Sample X-ray", r.pi]];
 
   return `
 <div class="results-page">
-  <!-- Risk Banner Card -->
-  <div class="result-card-banner ${cl}">
+  <h1 class="lab-page-title">Assessment result</h1>
+  <section class="result-card-banner ${cl}" aria-label="Simulated assessment score">
     <div class="result-top-row">
-      <div class="result-type-badge">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
-        ${TITLE[S.mode] || "Risk Assessment"}
-      </div>
-      <div class="result-pill-badge ${cl}">
-        <span class="dot"></span>
-        ${r.cat} Risk
-      </div>
+      <span class="result-type-badge">${esc(r.type || "Assessment")}</span>
+      <span class="result-pill-badge ${cl}">${esc(r.cat)} category</span>
     </div>
-
-    <div class="result-title-row">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-        <polyline points="22 4 12 14.01 9 11.01"/>
-      </svg>
-      ${r.cat} Risk Detected
+    <p class="result-title-row">${score} <span class="lab-score-unit">/ 100</span></p>
+    <div class="confidence-track" aria-hidden="true">
+      <div class="confidence-bar" style="width: ${score}%"></div>
     </div>
-
-    <p class="result-desc-text">
-      The integrated analysis of your clinical information and chest X-ray image indicates a ${r.cat.toLowerCase()} probability of lung cancer. This result should be interpreted alongside other clinical information and professional medical judgment. It is not a diagnosis.
-    </p>
-
-    <div class="confidence-box">
-      <div class="confidence-header">
-        <span>Confidence Score</span>
-        <span>${confPercent}%</span>
-      </div>
-      <div class="confidence-track">
-        <div class="confidence-bar" style="width: ${confPercent}%"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Medical Disclaimer Alert -->
-  <div class="disclaimer-alert">
-    <span class="disclaimer-icon">⚠️</span>
-    <p><strong>Medical Disclaimer:</strong> CONAN provides screening and risk assessment support for healthcare professionals. Results are NOT a medical diagnosis and should be interpreted alongside relevant clinical information and professional medical judgment.</p>
-  </div>
-
-  <!-- Risk Factor Breakdown -->
-  <div class="breakdown-section">
-    <div class="breakdown-header-wrap">
-      <div class="breakdown-head-title">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
-          <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
-          <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
-        </svg>
-        Risk Factor Breakdown
-      </div>
-      <div class="breakdown-head-sub">Clinical factors contributing to your lung cancer risk probability.</div>
-    </div>
-
-    <div class="breakdown-3col-grid">
-      ${breakdownFactors.map((f) => `
-        <div class="breakdown-tile">
-          <div class="breakdown-tile-top">
-            <div class="tile-icon-circle" style="background: ${f.bg}">${f.icon}</div>
-            <div class="tile-factor-name">${f.name}</div>
-            <div class="tile-badge ${catClass(f.cat)}">${f.cat} Risk</div>
-          </div>
-          <div class="tile-factor-sub">${f.sub}</div>
-          <div class="tile-factor-val">${f.val}</div>
-        </div>
-      `).join("")}
-    </div>
-  </div>
-
-  <!-- Actions -->
+    <p class="result-desc-text">Simulated score for the research demo. It does not measure the likelihood of lung cancer.</p>
+  </section>
+  <section class="breakdown-section" aria-labelledby="demo-inputs">
+    <h2 class="breakdown-head-title" id="demo-inputs">Scores used in this demo</h2>
+    <dl class="lab-score-list">
+      ${inputs.filter(([, value]) => Number.isFinite(value)).map(([label, value]) => `
+        <div><dt>${label}</dt><dd>${value} / 100</dd></div>`).join("")}
+    </dl>
+  </section>
   <div class="results-action-row">
-    <button class="btn-result-action primary" data-act="save">
-      ${S.saved ? "✓ Saved to Records" : "💾 Save Result to Records"}
-    </button>
-    <a href="#/assess" class="btn-result-action secondary">Start New Assessment</a>
-    <button class="btn-result-action secondary" onclick="window.print()">🖨️ Print / Export</button>
+    <button class="btn-result-action primary" data-act="save" ${S.saved ? "disabled" : ""}>${S.saved ? "Saved to records" : "Save result"}</button>
+    <a href="#/assess" class="btn-result-action secondary">Start new assessment</a>
+    <button class="btn-result-action secondary" onclick="window.print()">Print / export</button>
   </div>
 </div>`;
 }
@@ -772,10 +704,11 @@ function dashboard() {
 
   return `
 <div class="dashboard-page">
+  <h1 class="lab-page-title">Patient records</h1>
   <div class="dashboard-surface">
   <div class="dashboard-stats-grid">
     <div class="dash-stat-card">
-      <div class="dash-stat-label">TOTAL PATIENTS SCREENED</div>
+      <div class="dash-stat-label">SAVED ASSESSMENTS</div>
       <div class="dash-stat-num">${total}</div>
     </div>
     <div class="dash-stat-card">
@@ -789,9 +722,9 @@ function dashboard() {
   </div>
 
   <div class="dash-table-card">
-    <div class="dash-table-title">PATIENT RECORDS DATABASE</div>
+    <h2 class="dash-table-title">Saved assessments</h2>
     ${hist.length === 0
-      ? `<p style="color: #64748b; font-size: 1rem;">No patient assessments saved yet. Complete an assessment to see records listed here.</p>`
+      ? `<p class="lab-empty">No assessments saved yet. Complete an assessment and save its result to see it here.</p><a href="#/assess" class="btn-wiz-next">Choose an assessment</a>`
       : `<table>
            <thead>
              <tr>
@@ -812,8 +745,10 @@ function dashboard() {
                    <span class="tile-badge ${catClass(h.cat)}">${h.cat} Risk</span>
                  </td>
                  <td>
-                   <button class="subnav-back-pill" style="height:32px; padding:0 14px; font-size:0.85rem;" data-act="view" data-id="${h.id}">View</button>
-                   <button class="subnav-back-pill" style="height:32px; padding:0 14px; font-size:0.85rem; background:#dc2626;" data-act="rm" data-id="${h.id}">Delete</button>
+                   <div class="lab-record-actions">
+                     <button class="subnav-back-pill" data-act="view" data-id="${h.id}">View</button>
+                     <button class="subnav-back-pill lab-danger" data-act="rm" data-id="${h.id}">Delete</button>
+                   </div>
                  </td>
                </tr>
              `).join("")}
@@ -847,10 +782,10 @@ function privacyConsentModal() {
       <h3>Authorized Professional Use</h3>
       <p>CONAN is intended exclusively for healthcare professionals. Authorized users are responsible for ensuring that patient information entered into the system is obtained and handled appropriately.</p>
       <h3>Purpose of Processing</h3>
-      <p>CONAN analyzes clinical information and chest X-ray images to generate a lung cancer risk assessment and provide additional information for further clinical evaluation and decision-making.</p>
+      <p>This research demo uses questionnaire responses and a sample image to demonstrate the assessment workflow. Use fictional patient details and sample images.</p>
       <h3>Medical Disclaimer</h3>
       <div class="modal-disclaimer-card">
-        ⚠️ CONAN is a clinical decision-support and screening tool. Its results are not a definitive diagnosis and should be interpreted by a qualified healthcare professional together with other relevant clinical information.
+        This demo produces simulated scores. They cannot be used for screening, diagnosis, or clinical decisions.
       </div>
       <h3>Patient Data Privacy</h3>
       <p>Patient health information is sensitive personal information. Only necessary information should be entered, and the healthcare professional must ensure that appropriate patient consent or another lawful basis for processing is in place before processing the information.</p>
@@ -874,9 +809,9 @@ function about() {
   <div class="static-card">
     <h1>About CONAN</h1>
     <h2>Lung Cancer Risk Prediction &amp; Screening System</h2>
-    <p>CONAN is designed to support clinicians and community outreach health missions by providing rapid, accessible risk stratification for lung cancer. The model combines 23 clinical symptoms, environmental factors, and lifestyle indicators with deep convolutional neural network analysis of chest radiographs.</p>
-    <h2>Multimodal Architecture</h2>
-    <p>By bringing together structured clinical health factor scales and radiographic image analysis, CONAN produces unified screening recommendations that help health teams prioritize patients for formal diagnostic workup and low-dose computed tomography (LDCT).</p>
+    <p>CONAN is a research demo of a clinician-facing lung cancer screening workflow. It shows how questionnaire responses and chest X-ray uploads can fit into one assessment.</p>
+    <h2>What this version demonstrates</h2>
+    <p>Try the clinical, imaging, or combined path with sample data. Each path produces a simulated result that you can save and revisit in this browser.</p>
   </div>
 </div>`;
 }
@@ -901,7 +836,7 @@ function privacyPage() {
 <div class="static-page">
   <div class="static-card">
     <h1>Privacy Notice</h1>
-    <p>CONAN respects all applicable patient health privacy guidelines. No patient data is shared with external commercial entities. All records are maintained within your authorized clinical database session.</p>
+    <p>This demo saves accounts and assessment records in this browser’s local storage. Use fictional patient details and sample images. You can clear your saved history in Account Settings.</p>
   </div>
 </div>`;
 }
@@ -911,7 +846,7 @@ function terms() {
 <div class="static-page">
   <div class="static-card">
     <h1>Terms &amp; Conditions</h1>
-    <p>CONAN is intended strictly as a clinical decision-support and screening aid. It is not an automated diagnostic system and must not replace professional clinical judgment.</p>
+    <p>This version of CONAN is for research demonstrations with sample data. Its simulated scores cannot be used for screening, diagnosis, or clinical decisions.</p>
   </div>
 </div>`;
 }
@@ -948,9 +883,10 @@ function settings() {
   <div class="static-card">
     <h1>Account Settings</h1>
     <p>Logged in as: <strong>${esc(u || "Guest")}</strong></p>
-    <br>
-    <button class="btn-wiz-next" data-act="wipe">Clear Saved History</button>
-    <button class="btn-wiz-next" style="background:#dc2626; margin-left:12px;" data-act="delacct">Delete Account</button>
+    <div class="lab-settings-actions">
+      <button class="btn-wiz-next" data-act="wipe">Clear saved history</button>
+      <button class="btn-wiz-next lab-danger" data-act="delacct">Delete account</button>
+    </div>
   </div>
 </div>`;
 }
