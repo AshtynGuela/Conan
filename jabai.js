@@ -977,7 +977,14 @@ const V = {
    ============================================================ */
 function draw() {
   const route = S.route || "home-landing";
+  const app = $("#app");
+  const pageChanged = document.body.dataset.page !== route;
+  const previousStep = Number(app.dataset.step);
+  const stepChanged = !pageChanged && Object.hasOwn(TITLE, route) && previousStep !== S.step;
   document.body.dataset.page = route;
+  app.dataset.step = String(S.step);
+  app.dataset.motion = pageChanged ? "page" : "";
+  if (stepChanged) app.dataset.motion = S.step > previousStep ? "step-forward" : "step-back";
   const u = get("session");
   const isLoggedIn = !!u;
   const isPreLogin = ["home-landing", "login", "signup", ""].includes(route);
@@ -987,7 +994,7 @@ function draw() {
   const privacyHtml = S.showPrivacy ? privacyConsentModal() : "";
   const subnav = (isLoggedIn && !isPreLogin) ? renderSubnav(route) : "";
 
-  $("#app").innerHTML =
+  app.innerHTML =
     renderHeader(route) +
     subnav +
     `<main id="main" tabindex="-1">${content}</main>` +
@@ -996,8 +1003,15 @@ function draw() {
 
   if (S.showPrivacy) {
     const modal = $("#privacy-modal");
-    for (const child of $("#app").children) child.inert = child !== modal;
+    for (const child of app.children) child.inert = child !== modal;
     $("#privacy-modal-title").focus({ preventScroll: true });
+  } else if (stepChanged) {
+    const heading = $(".wiz-section-label");
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
+    if (heading.getBoundingClientRect().top < 0) {
+      heading.scrollIntoView({ block: "start", behavior: "instant" });
+    }
   }
 }
 
