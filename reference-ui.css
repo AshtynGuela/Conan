@@ -331,6 +331,8 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
 
 .top-nav a:is(:hover, :focus-visible)::after { transform: scaleX(1); }
 
+:is(.hero-cta-btn, .landing-buttons-row a) { position: relative; overflow: hidden; }
+
 .hamburger-btn { --line-step: 15px; }
 .hamburger-btn span { transition: transform 180ms ease-out, opacity 120ms ease-out; }
 .hamburger-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(var(--line-step)) rotate(45deg); }
@@ -345,16 +347,16 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
 
   /* Animate new content groups, leaving the surrounding frame in place. */
   #app[data-motion="page"] :is(
-    .feature-card-content, .landing-right-panel > div, .auth-card h1,
+    .landing-right-panel > div, .auth-card h1,
     .auth-field, .auth-btn-pill, .auth-forgot, .auth-check, .auth-link,
-    .hero-left-content > *, .assess-page-title, .assess-option-card,
+    .hero-desc, .hero-cta-btn, .assess-page-title, .assess-option-card,
     .dashboard-stats-grid > *, .dash-table-card, .static-card, .results-page > *
   ) {
     animation: content-arrive 240ms var(--motion-ease) backwards;
   }
 
   #app[data-motion="page"] :is(
-    .landing-col.bordered .feature-card-content, .landing-right-panel > div:last-child,
+    .landing-right-panel > div:last-child,
     .auth-field:nth-child(2), .hero-desc, .assess-option-card:nth-child(2),
     .dash-stat-card:nth-child(2), .results-page > :nth-child(2)
   ) { animation-delay: 32ms; }
@@ -368,6 +370,29 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
   #app[data-motion="page"] :is(.subnav-tab[aria-current="page"], .subnav-wizard-title) {
     animation: nav-arrive 180ms var(--motion-ease);
   }
+
+  #app[data-motion="page"] :is(.landing-hero-head, .hero-headline) {
+    animation: headline-reveal 620ms var(--motion-ease) backwards;
+  }
+
+  #app[data-motion="page"] .feature-card-content {
+    animation: landing-arrive 580ms var(--motion-ease) backwards;
+  }
+
+  #app[data-motion="page"] .landing-col.bordered .feature-card-content {
+    animation-delay: 120ms;
+  }
+
+  #app[data-motion="page"] :is(.hero-cta-btn, .landing-buttons-row a)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 27%, #fff7 49%, transparent 71%);
+    animation: button-sheen 740ms 240ms ease-in-out both;
+  }
+
+  #app[data-motion="page"] .landing-buttons-row a + a::after { animation-delay: 360ms; }
 
   #app[data-motion="step-forward"] { --step-offset: 12px; }
   #app[data-motion="step-back"] { --step-offset: -12px; }
@@ -410,6 +435,21 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
     to { transform: none; opacity: 1; }
   }
 
+  @keyframes headline-reveal {
+    from { clip-path: inset(0 0 100% 0); opacity: .35; }
+    to { clip-path: inset(0 0 0 0); opacity: 1; }
+  }
+
+  @keyframes landing-arrive {
+    from { transform: translateY(18px); opacity: .5; }
+    to { transform: none; opacity: 1; }
+  }
+
+  @keyframes button-sheen {
+    0% { transform: translateX(-110%); }
+    100% { transform: translateX(110%); }
+  }
+
   @keyframes nav-arrive {
     from { opacity: .6; }
     to { opacity: 1; }
@@ -434,4 +474,13 @@ input:focus-visible, select:focus-visible { outline-color: white; outline-offset
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
+
+  #app[data-motion="page"] :is(.hero-cta-btn, .landing-buttons-row a) {
+    animation: button-tone 500ms ease-out;
+  }
+
+  @keyframes button-tone {
+    from { opacity: .78; }
+    to { opacity: 1; }
+  }
 }
