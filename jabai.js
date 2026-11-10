@@ -313,13 +313,15 @@ function login() {
 <div class="auth-page">
   <div class="auth-card">
     <h1>LOG IN</h1>
-    ${S.err ? `<div class="err-msg">${esc(S.err)}</div>` : ""}
-    <form id="signin-form">
+    <form id="signin-form" novalidate>
+      <div class="err-msg" data-auth-error role="alert" hidden></div>
       <div class="auth-field">
-        <input class="auth-input" id="email" aria-label="Email or mobile phone number" name="email" type="text" placeholder="Email or Mobile Phone Number" autocomplete="username" required>
+        <input class="auth-input" id="email" aria-label="Email or mobile phone number" aria-describedby="email-error" name="email" type="text" placeholder="Email or Mobile Phone Number" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        <p class="auth-feedback" id="email-error" aria-live="polite"></p>
       </div>
       <div class="auth-field">
-        <input class="auth-input" id="pw" aria-label="Password" name="pw" type="password" placeholder="Password" autocomplete="current-password" required>
+        <input class="auth-input" id="pw" aria-label="Password" aria-describedby="pw-error" name="pw" type="password" placeholder="Password" autocomplete="current-password" required>
+        <p class="auth-feedback" id="pw-error" aria-live="polite"></p>
       </div>
       <button class="auth-btn-pill" type="submit">LOG IN</button>
       <button type="button" class="auth-forgot" data-act="forgot">Forgot Password?</button>
@@ -340,16 +342,19 @@ function signup() {
 <div class="auth-page">
   <div class="auth-card">
     <h1>SIGN UP</h1>
-    ${S.err ? `<div class="err-msg">${esc(S.err)}</div>` : ""}
-    <form id="signup-form">
+    <form id="signup-form" novalidate>
+      <div class="err-msg" data-auth-error role="alert" hidden></div>
       <div class="auth-field">
-        <input class="auth-input" id="reg-email" aria-label="Email address" name="email2" type="text" placeholder="Email or Mobile Phone Number" autocomplete="username" required>
+        <input class="auth-input" id="reg-email" aria-label="Email or mobile phone number" aria-describedby="reg-email-error" name="email2" type="text" placeholder="Email or Mobile Phone Number" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        <p class="auth-feedback" id="reg-email-error" aria-live="polite"></p>
       </div>
       <div class="auth-field">
-        <input class="auth-input" id="reg-pw" aria-label="Password" name="pw2" type="password" placeholder="Password" autocomplete="new-password" required>
+        <input class="auth-input" id="reg-pw" aria-label="Password" aria-describedby="reg-pw-error" name="pw2" type="password" placeholder="Password" autocomplete="new-password" required>
+        <p class="auth-feedback" id="reg-pw-error" aria-live="polite"></p>
       </div>
       <div class="auth-field">
-        <input class="auth-input" id="reg-pw3" aria-label="Confirm password" name="pw3" type="password" placeholder="Confirm Password" autocomplete="new-password" required>
+        <input class="auth-input" id="reg-pw3" aria-label="Confirm password" aria-describedby="reg-pw3-error" name="pw3" type="password" placeholder="Confirm Password" autocomplete="new-password" required>
+        <p class="auth-feedback" id="reg-pw3-error" aria-live="polite"></p>
       </div>
       <button class="auth-btn-pill" type="submit">SIGN UP</button>
       <label class="auth-check">
@@ -1084,60 +1089,97 @@ function saveRes() {
   draw();
 }
 
+function normalizeAccountId(value) {
+  const identifier = value.trim().toLowerCase();
+  if (/^\S+@\S+\.\S+$/.test(identifier)) return identifier;
+
+  const phone = identifier.replace(/[\s().-]/g, "").replace(/^00/, "+");
+  if (/^09\d{9}$/.test(phone)) return "+63" + phone.slice(1);
+  if (/^639\d{9}$/.test(phone)) return "+" + phone;
+  if (phone.startsWith("+63")) return /^\+639\d{9}$/.test(phone) ? phone : "";
+  return /^\+[1-9]\d{7,14}$/.test(phone) ? phone : "";
+}
+
+function authInputError(input) {
+  if (input.type === "text") {
+    if (!input.value.trim()) return "Enter your email or mobile number.";
+    return normalizeAccountId(input.value) ? "" : "Enter a valid email or mobile number, such as 0917 123 4567.";
+  }
+  if (input.name === "pw3") {
+    if (!input.value) return "Confirm your password.";
+    return input.value === input.form.elements.pw2.value ? "" : "Passwords do not match.";
+  }
+  if (!input.value) return "Enter your password.";
+  return input.value.length < 6 ? "Password must be at least 6 characters." : "";
+}
+
+function validateAuthInput(input) {
+  const error = authInputError(input);
+  const feedback = document.getElementById(input.id + "-error");
+  if (feedback.textContent !== error) feedback.textContent = error;
+  if (error) input.setAttribute("aria-invalid", "true");
+  else input.removeAttribute("aria-invalid");
+  return !error;
+}
+
+function setAuthError(form, message) {
+  const alert = form.querySelector("[data-auth-error]");
+  alert.hidden = !message;
+  alert.textContent = message;
+}
+
 /* ============================================================
    EVENT LISTENERS
    ============================================================ */
 document.addEventListener("submit", async (e) => {
+  const form = e.target;
+  if (!form.matches("#signin-form, #signup-form")) return;
   e.preventDefault();
-  const f = e.target;
-  const d = Object.fromEntries(new FormData(f));
-  const users = get("users", {});
-  S.err = "";
+  const submit = form.querySelector('[type="submit"]');
+  if (submit.disabled) return;
 
-  if (f.id === "signin-form") {
-    const em = (d.email || "").trim().toLowerCase();
-    const u = users[em];
-    if (!u || u.h !== (await hashPw(d.pw, em))) {
-      S.err = "Email or password is incorrect.";
-      return draw();
+  setAuthError(form, "");
+  const invalid = Array.from(form.querySelectorAll(".auth-input")).filter(input => !validateAuthInput(input));
+  if (invalid.length) {
+    invalid[0].focus();
+    return;
+  }
+
+  const signup = form.id === "signup-form";
+  const identifier = form.elements[signup ? "email2" : "email"];
+  const password = form.elements[signup ? "pw2" : "pw"];
+  const id = normalizeAccountId(identifier.value);
+  const enteredPassword = password.value;
+  submit.disabled = true;
+
+  try {
+    const hash = await hashPw(enteredPassword, id);
+    if (!form.isConnected || normalizeAccountId(identifier.value) !== id || password.value !== enteredPassword) return;
+    if (signup && !validateAuthInput(form.elements.pw3)) return;
+
+    const users = get("users", {});
+    if (signup) {
+      if (users[id]) {
+        setAuthError(form, "An account with this email or mobile number already exists. Log in instead.");
+        return;
+      }
+      users[id] = { name: id.split("@")[0], h: hash };
+      set("users", users);
+    } else if (users[id]?.h !== hash) {
+      setAuthError(form, "The email, mobile number, or password is incorrect.");
+      return;
     }
-    set("session", em);
-    S.showPrivacy = !get("privacy-ok." + em);
+
+    set("session", id);
+    S.showPrivacy = signup || !get("privacy-ok." + id);
     if (S.showPrivacy) {
-      S.privacyUser = em;
+      S.privacyUser = id;
       draw();
     } else {
       afterAuth();
     }
-  }
-
-  if (f.id === "signup-form") {
-    const em = (d.email2 || "").trim().toLowerCase();
-    if (!/^\S+@\S+\.\S+$/.test(em)) {
-      S.err = "Please enter a valid email address.";
-      return draw();
-    }
-    if ((d.pw2 || "").length < 6) {
-      S.err = "Password must be at least 6 characters.";
-      return draw();
-    }
-    if (d.pw2 !== d.pw3) {
-      S.err = "Passwords do not match.";
-      return draw();
-    }
-    if (users[em]) {
-      S.err = "An account with this email already exists.";
-      return draw();
-    }
-    users[em] = {
-      name: em.split("@")[0],
-      h: await hashPw(d.pw2, em),
-    };
-    set("users", users);
-    set("session", em);
-    S.showPrivacy = true;
-    S.privacyUser = em;
-    draw();
+  } finally {
+    submit.disabled = false;
   }
 });
 
@@ -1151,6 +1193,13 @@ document.addEventListener("change", (e) => {
 document.addEventListener("input", (e) => {
   const t = e.target;
   if (t.dataset.wf) S.vals[t.dataset.wf] = t.value;
+  if (!t.matches(".auth-input")) return;
+  setAuthError(t.form, "");
+  validateAuthInput(t);
+  if (t.name === "pw2") {
+    const confirmation = t.form.elements.pw3;
+    if (confirmation.value || confirmation.hasAttribute("aria-invalid")) validateAuthInput(confirmation);
+  }
 });
 
 /* Drag & Drop */

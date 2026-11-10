@@ -101,6 +101,10 @@ body[data-page="login"] header, body[data-page="signup"] header { background: tr
 .auth-field { margin-bottom: 16px; }
 .auth-input { min-height: 72px; border: 0; border-radius: 0; padding: 17px 16px; background: #39768b; font-size: 19px; }
 .auth-input::placeholder { color: #d2e4e7; }
+.auth-input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px #ffc0b4; }
+.auth-feedback { color: #ffddd6; font-size: .9375rem; line-height: 1.4; }
+.auth-feedback:not(:empty) { margin-top: 6px; }
+.auth-btn-pill:disabled { cursor: wait; opacity: .8; }
 .auth-btn-pill { min-height: 68px; margin: 2px 0 14px; padding: 11px; font-size: 29px; color: #164b60; background: linear-gradient(100deg,#ccffda,#96b8ff); text-shadow: none; box-shadow: none; }
 .auth-forgot { margin: 0 auto 28px; font-size: 16px; }
 .auth-check { font-size: 17px; gap: 7px; }
